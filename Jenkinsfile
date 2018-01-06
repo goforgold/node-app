@@ -1,7 +1,7 @@
 pipeline {
   agent {
     docker {
-      image 'build-container'
+      image 'goforgold/build-container:latest'
     }
   }
   environment {
