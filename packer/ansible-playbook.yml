@@ -1,0 +1,40 @@
+---
+- hosts: all
+
+  tasks:
+
+    - name: Install the gpg key for nodejs LTS
+      become: true
+      apt_key:
+        url: "http://deb.nodesource.com/gpgkey/nodesource.gpg.key"
+        state: present
+        validate_certs: no
+
+    - name: Install the nodejs LTS repos
+      become: true
+      apt_repository:
+        repo: "deb http://deb.nodesource.com/node_8.x {{ ansible_distribution_release }} main"
+        state: present
+        update_cache: yes
+
+    - name: Install NodeJs
+      become: true
+      apt:
+        name: nodejs
+        state: present
+    
+    - name: Install PM2
+      become: true
+      command: npm install -g pm2
+
+    - name: Create PM2 service
+      become: true
+      command: env PATH=$PATH:/usr/bin pm2 startup upstart -u ubuntu --hp /home/ubuntu
+
+    - name: PM2 startup configuration (pm2 start)
+      command: pm2 start bin/www --name="node-app"
+      args:
+        chdir: /home/ubuntu/node-app/
+
+    - name: PM2 startup configuration (pm2 save)
+      command: pm2 save
