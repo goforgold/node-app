@@ -13,8 +13,7 @@ pipeline {
     }
     stage('Create Packer AMI') {
       steps {
-        sh '''packer build -var \'aws_access_key=AKIAINVK627I4OKVC5PA\' -var \'aws_secret_key=sFZSEZ//pIOQQnSHf5yVYVWSVnB2naBEayVPMD
-Tp\' packer/packer.json'''
+        sh 'packer build -var \'aws_access_key=AKIAIXXNI7MARFYU4CKA\' -var \'aws_secret_key=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\' packer/packer.json'
       }
     }
   }
