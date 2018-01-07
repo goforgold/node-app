@@ -3,9 +3,7 @@ pipeline {
     docker {
       image 'goforgold/build-container:latest'
     }
-  }
-  environment {
-      npm_config_cache = 'npm-cache'
+    
   }
   stages {
     stage('Build') {
@@ -13,5 +11,14 @@ pipeline {
         sh 'npm install'
       }
     }
+    stage('Create Packer AMI') {
+      steps {
+        sh '''packer build -var \'aws_access_key=AKIAINVK627I4OKVC5PA\' -var \'aws_secret_key=sFZSEZ//pIOQQnSHf5yVYVWSVnB2naBEayVPMD
+Tp\' packer/packer.json'''
+      }
+    }
+  }
+  environment {
+    npm_config_cache = 'npm-cache'
   }
 }
