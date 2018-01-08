@@ -17,6 +17,8 @@ pipeline {
             usernamePassword(credentialsId: '2facaea2-613b-4f34-9fb7-1dc2daf25c45', passwordVariable: 'REPO_PASS', usernameVariable: 'REPO_USER'),
           ]) {
             sh 'packer build -var aws_access_key=${AWS_KEY} -var aws_secret_key=${AWS_SECRET} packer/packer.json'
+            sh 'git config user.email shashwat2691@gmail.com'
+            sh 'git config user.name "Shashwat Tripathi"'
             sh 'git clone https://github.com/goforgold/node-app-terraform.git'
             sh '''
                cd node-app-terraform
