@@ -19,6 +19,7 @@ pipeline {
             sh 'packer build -var aws_access_key=${AWS_KEY} -var aws_secret_key=${AWS_SECRET} packer/packer.json'
             sh 'git config user.email shashwat2691@gmail.com'
             sh 'git config user.name "Shashwat Tripathi"'
+            sh 'rm -rf node-app-terraform'
             sh 'git clone https://github.com/goforgold/node-app-terraform.git'
             sh '''
                cd node-app-terraform
