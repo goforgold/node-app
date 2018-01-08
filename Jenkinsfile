@@ -36,6 +36,7 @@ pipeline {
                git push https://${REPO_USER}:${REPO_PASS}@github.com/goforgold/node-app-terraform.git master
             '''
         }
+      }
     }
   }
   environment {
